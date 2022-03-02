@@ -1,0 +1,201 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #1a1e23;
+}
+
+input,
+button,
+submit {
+  border: none;
+}
+
+input:focus {
+  outline: none;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 300px));
+  gap: 30px;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.btn {
+  background-color: #2b2a20;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.btn:hover {
+  opacity: 0.8;
+}
+
+.btn:active {
+  opacity: 1;
+}
+
+.hide {
+  opacity: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+.show {
+  opacity: 1;
+  height: auto;
+  position: fixed; /* Sit on top of the page content */
+  width: 100%; /* Full width (cover the whole page) */
+  height: 100%; /* Full height (cover the whole page) */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* Black background with opacity */
+  z-index: 2;
+}
+
+.error-text-color {
+  color: brown;
+}
+
+.container header {
+  padding-top: 20px;
+  grid-column: 1 / -1;
+  display: flex;
+  color: wheat;
+  align-items: center;
+}
+
+.container header .name {
+  font-size: 1.5rem;
+  font-weight: 700;
+  flex: 1;
+}
+
+.container header ul {
+  align-self: flex-end;
+  list-style: none;
+  display: flex;
+}
+
+.card {
+  background: url("./vladislav-filippov-iQN80yNaGNY-unsplash.jpg") no-repeat
+    center/cover;
+  border-radius: 20px;
+  height: 500px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+  text-align: center;
+  padding: 16px 32px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  position: relative;
+}
+
+.card > * {
+  border-bottom: 1px solid white;
+  padding: 8px;
+}
+
+.card > *:last-child {
+  border-bottom: none;
+}
+
+.card .delete-book-btn {
+  position: absolute;
+  bottom: 5%;
+  right: 5%;
+}
+
+.title {
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+
+.credits {
+  margin-top: 1rem;
+  color: white;
+  text-align: center;
+  font-size: 0.8rem;
+}
+
+.credits a {
+  text-decoration: underline;
+  color: wheat;
+}
+
+#overlay {
+  display: block;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.form-container form {
+  min-width: 300px;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  padding: 16px 32px;
+  border-radius: 10px;
+  position: relative;
+}
+
+.form-container form header {
+  text-align: center;
+  margin-bottom: 10px;
+  font-size: 1.2rem;
+}
+
+form .close-btn {
+  position: absolute;
+  right: 3%;
+  top: 2%;
+  cursor: pointer;
+}
+
+form .close-btn:hover {
+  opacity: 0.5;
+}
+
+form .close-btn:active {
+  opacity: 1;
+}
+
+form .input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 8px 0;
+}
+form .input-group input {
+  border: 1px solid #d4d4d4;
+  height: 2rem;
+  padding: 8px;
+  border-radius: 5px;
+}
+
+form .form-btns-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 8px;
+}
+
+form .form-btns-container button[type="submit"] {
+  flex-basis: 60%;
+}

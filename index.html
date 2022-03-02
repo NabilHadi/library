@@ -5,11 +5,59 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./style.css">
   <title>Hello world</title>
 </head>
 
 <body>
-  <h1>Hello world!</h1>
+  <div class="container">
+    <header>
+      <div class="name">Library</div>
+      <ul>
+        <li id="add-book-btn" class="btn">Add book</li>
+      </ul>
+    </header>
+  </div>
+  <div class="credits">Photo by <a
+      href="https://unsplash.com/@fillvlad?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Vladislav
+      Filippov</a> on <a
+      href="https://unsplash.com/t/nature?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+  </div>
+  <div id="overlay" class="hide">
+    <div class="form-container">
+      <form action="" id="add-book-form">
+        <span id="close-form-btn" class="close-btn"><svg style="width:24px;height:24px" viewBox="0 0 24 24">
+            <path fill="currentColor"
+              d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" />
+          </svg></span>
+        <header>Add New Book</header>
+        <div class="input-group">
+          <label for="book-title">Book Title*</label>
+          <input type="text" name="book-title" id="form-book-title" required>
+          <span class="validation-error-message"></span>
+        </div>
+        <div class="input-group">
+          <label for="book-author">Book author*</label>
+          <input type="text" name="book-author" id="form-book-author" required>
+        </div>
+        <div class="input-group">
+          <label for="book-pages">Number of pages*</label>
+          <input type="number" name="book-pages" id="form-book-pages" required>
+        </div>
+        <div class="input-group">
+          <label for="book-read-status">Did you read this book?</label>
+          <select name="book-read-status" id="form-book-read-status">
+            <option value="not-read">No</option>
+            <option value="read">Yes</option>
+          </select>
+        </div>
+        <div class="form-btns-container">
+          <button id="form-submit-btn" class="btn" type="submit">Add book</button>
+          <button id="form-clear-btn" class="btn" type="reset">Clear</button>
+        </div>
+      </form>
+    </div>
+  </div>
   <script src="./app.js"></script>
 </body>
 
