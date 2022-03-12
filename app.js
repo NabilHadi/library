@@ -1,23 +1,43 @@
 const myLibrary = [];
 let id = 0;
 
-function Book(title, author, numOfPages, isRead) {
-  this.title = title;
-  this.author = author;
-  this.numOfPages = numOfPages;
-  this.isRead = isRead;
-  this.id = id++;
+class Book {
+  constructor(title, author, numOfPages, isRead) {
+    this.title = title;
+    this.author = author;
+    this.numOfPages = numOfPages;
+    this.isRead = isRead;
+    this.id = id++;
+  }
+
+  info() {
+    return `${this.title} by ${this.author}, ${this.numOfPages} pages, ${
+      this.isRead ? "read" : "not read yet"
+    }`;
+  }
+
+  toggleRead() {
+    this.isRead ? (this.isRead = false) : (this.isRead = true);
+  }
 }
 
-Book.prototype.info = function () {
-  return `${this.title} by ${this.author}, ${this.numOfPages} pages, ${
-    this.isRead ? "read" : "not read yet"
-  }`;
-};
+// function Book(title, author, numOfPages, isRead) {
+//   this.title = title;
+//   this.author = author;
+//   this.numOfPages = numOfPages;
+//   this.isRead = isRead;
+//   this.id = id++;
+// }
 
-Book.prototype.toggleRead = function () {
-  this.isRead ? (this.isRead = false) : (this.isRead = true);
-};
+// Book.prototype.info = function () {
+//   return `${this.title} by ${this.author}, ${this.numOfPages} pages, ${
+//     this.isRead ? "read" : "not read yet"
+//   }`;
+// };
+
+// Book.prototype.toggleRead = function () {
+//   this.isRead ? (this.isRead = false) : (this.isRead = true);
+// };
 
 function addBookToLibrary(book) {
   myLibrary.push(book);
