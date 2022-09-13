@@ -1,4 +1,5 @@
 let myLibrary = [];
+let tableRowsArray = [];
 
 function Book(title, author, pages, isRead) {
   this.title = title;
@@ -19,6 +20,7 @@ function addBookToLibrary(title, author, pages, isRead) {
 }
 
 function displayBooks() {
+  tableRowsArray.forEach((row) => row.remove());
   const rows = myLibrary.map(({ title, author, pages, isRead }, index) => {
     const tableRow = document.createElement("tr");
     tableRow.dataset.index = index;
@@ -34,6 +36,7 @@ function displayBooks() {
   });
   const tableBody = document.querySelector(".books-table tbody");
   tableBody.append(...rows);
+  tableRowsArray.push(...rows);
 }
 
 addBookToLibrary(
@@ -43,5 +46,32 @@ addBookToLibrary(
   false
 );
 addBookToLibrary("You Don't Know JS Yet", "Kyle Simpson", 200, true);
-
 displayBooks();
+
+const formModal = document.querySelector("#form-modal");
+
+const newBookForm = document.querySelector("#new-book-form");
+newBookForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+  console.log(e);
+  const bookTile = e.target.querySelector("input#book-title").value;
+  const bookAuthor = e.target.querySelector("input#book-author").value;
+  const bookPages = e.target.querySelector("input#book-pages").value;
+  const bookStatus = e.target.querySelector("input#book-read").checked;
+
+  addBookToLibrary(bookTile, bookAuthor, bookPages, bookStatus);
+  displayBooks();
+  e.target.reset();
+  formModal.style.display = "none";
+});
+
+const newBookBtn = document.querySelector("#new-book-btn");
+newBookBtn.addEventListener("click", () => {
+  formModal.style.display = "block";
+});
+
+window.addEventListener("click", function (event) {
+  if (event.target == formModal) {
+    formModal.style.display = "none";
+  }
+});
