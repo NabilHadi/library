@@ -60,4 +60,13 @@ button {
   padding: 8px 1rem;
   border-radius: 10px;
   border: 1px solid silver;
+  cursor: pointer;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+button:active {
+  opacity: 1;
 }

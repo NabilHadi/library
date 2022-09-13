@@ -20,20 +20,54 @@ function addBookToLibrary(title, author, pages, isRead) {
 }
 
 function displayBooks() {
+  // Clear table rows
   tableRowsArray.forEach((row) => row.remove());
+  tableRowsArray = [];
+
+  // Loop over each book in library and map them to table rows
   const rows = myLibrary.map(({ title, author, pages, isRead }, index) => {
     const tableRow = document.createElement("tr");
     tableRow.dataset.index = index;
+    // Add Book's title, author, and pages to table row
     for (const key of [title, author, pages]) {
       const tableCell = document.createElement("td");
       tableCell.textContent = key;
       tableRow.append(tableCell);
     }
+    // Add Book Read Status to table row
     const readStatusCell = document.createElement("td");
     readStatusCell.textContent = isRead ? "Read" : "Not Read";
     tableRow.append(readStatusCell);
+
+    // Add change read status button
+    const changeStatusBtn = document.createElement("button");
+    changeStatusBtn.textContent = isRead ? "Unread" : "Read";
+    changeStatusBtn.addEventListener("click", () => {
+      myLibrary[index].isRead = !myLibrary[index].isRead;
+      readStatusCell.textContent = myLibrary[index].isRead
+        ? "Read"
+        : "Not Read";
+    });
+    const changeStatusBtnCell = document.createElement("td");
+    changeStatusBtnCell.append(changeStatusBtn);
+    tableRow.append(changeStatusBtnCell);
+
+    // Add delete button
+    const deleteBtn = document.createElement("button");
+    deleteBtn.textContent = "Delete";
+    const deleteBtnCell = document.createElement("td");
+    deleteBtnCell.append(deleteBtn);
+    deleteBtn.addEventListener("click", () => {
+      myLibrary.splice(index, 1);
+      tableRowsArray[index].remove();
+      displayBooks();
+    });
+    tableRow.append(deleteBtnCell);
+
     return tableRow;
   });
+
+  // Add table rows to table body
   const tableBody = document.querySelector(".books-table tbody");
   tableBody.append(...rows);
   tableRowsArray.push(...rows);
@@ -53,7 +87,6 @@ const formModal = document.querySelector("#form-modal");
 const newBookForm = document.querySelector("#new-book-form");
 newBookForm.addEventListener("submit", (e) => {
   e.preventDefault();
-  console.log(e);
   const bookTile = e.target.querySelector("input#book-title").value;
   const bookAuthor = e.target.querySelector("input#book-author").value;
   const bookPages = e.target.querySelector("input#book-pages").value;
