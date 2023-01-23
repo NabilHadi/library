@@ -1,4 +1,57 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
   background-color: antiquewhite;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  padding: 1rem;
+}
+
+ul {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.card {
+  background-color: white;
+  padding: 1rem;
+  border-radius: 5%;
+}
+
+.card:hover {
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+li .card {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 0.8rem;
+}
+
+li .card > :not(:last-child) {
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.16);
+}
+
+.book-title {
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.book-author::before {
+  content: "By ";
+  font-weight: 500;
+}
+
+.book-pages::after {
+  content: " pages";
+  font-weight: 500;
 }
