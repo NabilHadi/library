@@ -148,6 +148,14 @@ const Library = (function () {
 
       PubSub.publish("BookAdded", books);
     },
+    removeBookFromLibrary(bookIndex) {
+      if (typeof bookIndex !== "number") bookIndex = Number(bookIndex);
+      if (bookIndex < 0 || bookIndex >= books.length) return;
+
+      const removedBook = books.splice(bookIndex, 1);
+
+      PubSub.publish("BookRemoved", books, removedBook, bookIndex);
+    },
     getBooks() {
       return [...books];
     },
@@ -181,8 +189,16 @@ const BookForm = (function () {
 })();
 
 const BookList = (function () {
-  function createCard(book) {
-    const card = createElement({ classNames: ["card"] });
+  function handleDeleteBtnClick(event) {
+    const index = event.target.dataset.index;
+    if (!index) return;
+    console.log(event);
+
+    PubSub.publish("removeBookFromLibrary", index);
+  }
+
+  function createCard(book, index) {
+    const card = createElement({ classNames: ["card"], dataset: { index } });
     const titleDiv = createElement({
       textContent: book.title,
       classNames: ["book-title"],
@@ -200,15 +216,26 @@ const BookList = (function () {
       classNames: ["book-isRead"],
     });
 
-    card.append(titleDiv, authorDiv, pagesDiv, isReadDiv);
+    const deleteBookBtn = createElement({
+      tag: "button",
+      classNames: ["btn", "delete-book-btn"],
+      textContent: "Delete",
+      eventHandlers: {
+        click: handleDeleteBtnClick,
+      },
+      dataset: { index },
+    });
+
+    card.append(titleDiv, authorDiv, pagesDiv, isReadDiv, deleteBookBtn);
     return card;
   }
+
   function displayBooks(books) {
     const bookUL = document.querySelector(".books-list");
     bookUL.innerHTML = "";
-    const booksLis = books.map((book) => {
+    const booksLis = books.map((book, index) => {
       const li = document.createElement("li");
-      li.append(createCard(book));
+      li.append(createCard(book, index));
       return li;
     });
 
@@ -216,7 +243,9 @@ const BookList = (function () {
   }
 
   PubSub.subscribe("BookAdded", displayBooks);
+  PubSub.subscribe("BookRemoved", displayBooks);
   displayBooks(Library.getBooks());
 })();
 
 PubSub.subscribe("addBookToLibrary", Library.addBookToLibrary);
+PubSub.subscribe("removeBookFromLibrary", Library.removeBookFromLibrary);
