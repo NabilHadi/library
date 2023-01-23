@@ -115,14 +115,34 @@ const BookForm = (function () {
 })();
 
 const BookList = (function () {
+  function createCard(book) {
+    const card = createElement({ classNames: ["card"] });
+    const titleDiv = createElement({
+      textContent: book.title,
+      classNames: ["book-title"],
+    });
+    const authorDiv = createElement({
+      textContent: book.author,
+      classNames: ["book-author"],
+    });
+    const pagesDiv = createElement({
+      textContent: book.pages,
+      classNames: ["book-pages"],
+    });
+    const isReadDiv = createElement({
+      textContent: book.isRead ? "Read" : "Not read",
+      classNames: ["book-isRead"],
+    });
+
+    card.append(titleDiv, authorDiv, pagesDiv, isReadDiv);
+    return card;
+  }
   function displayBooks(books) {
     const bookUL = document.querySelector(".books-list");
     bookUL.innerHTML = "";
     const booksLis = books.map((book) => {
       const li = document.createElement("li");
-      li.textContent = `${book.title} by ${book.author}, ${book.pages} pages, ${
-        book.isRead ? "Read" : "Not read"
-      }.`;
+      li.append(createCard(book));
       return li;
     });
 
