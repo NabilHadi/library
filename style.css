@@ -18,6 +18,30 @@ ul {
   padding: 1rem;
 }
 
+.btn,
+button,
+input[type="submit"],
+input[type="reset"] {
+  padding: 1vh 2vw;
+  border: none;
+  cursor: pointer;
+}
+
+.btn:hover,
+button:hover,
+input[type="submit"]:hover,
+input[type="reset"]:hover {
+  opacity: 0.8;
+}
+
+.btn:active,
+button:active,
+input[type="submit"]:active,
+input[type="reset"]:active {
+  opacity: 1;
+  cursor: default;
+}
+
 .card {
   background-color: white;
   padding: 1rem;

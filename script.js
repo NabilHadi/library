@@ -171,7 +171,13 @@ const BookForm = (function () {
     PubSub.publish("addBookToLibrary", bookObj);
   }
   const newBookForm = document.querySelector("#new_book_form");
+  modal.setContent([newBookForm]);
   newBookForm.addEventListener("submit", handleFormSubmit);
+
+  const newBookButton = document.querySelector("#new_book_button");
+  newBookButton.addEventListener("click", () => {
+    modal.showModal();
+  });
 })();
 
 const BookList = (function () {
