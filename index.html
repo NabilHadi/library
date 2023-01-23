@@ -12,47 +12,7 @@
 <body>
   <h1>Library</h1>
   <div class="container">
-    <table class="books-table">
-      <thead>
-        <tr>
-          <th>Title</th>
-          <th>Author</th>
-          <th>pages</th>
-          <th>Read status</th>
-          <th>Change read status</th>
-          <th>Remove book</th>
-        </tr>
-      </thead>
-      <tbody>
 
-      </tbody>
-    </table>
-    <button id="new-book-btn">NEW BOOK</button>
-  </div>
-  <div id="form-modal">
-    <form id="new-book-form">
-      <legend>New Book Details</legend>
-      <div class="input-group">
-        <label for="book-title">Book Title</label>
-        <input required type="text" name="book-title" id="book-title">
-      </div>
-      <div class="input-group">
-        <label for="book-author">Book Author</label>
-        <input required type="text" name="book-author" id="book-author">
-      </div>
-      <div class="input-group">
-        <label for="book-pages">Book Pages</label>
-        <input required type="number" min="0" name="book-pages" id="book-pages">
-      </div>
-      <div class="radio-group">
-        <input type="radio" name="book-read-status" id="book-read" value="true">
-        <label for="book-read">Read</label>
-        <input type="radio" name="book-read-status" id="book-not-read" value="false" checked>
-        <label for="book-not-read">Not Read</label>
-      </div>
-      <button type="submit">Add book</button>
-      <button type="reset">Clear</button>
-    </form>
   </div>
   <script src="./script.js"></script>
 </body>
