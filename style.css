@@ -122,3 +122,38 @@ li .card > :not(:last-child) {
   text-decoration: none;
   cursor: pointer;
 }
+
+#new_book_form {
+  border: 3px solid antiquewhite;
+  border-radius: 10px;
+  margin-top: 1rem;
+  padding: 1rem;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.input-group label {
+  font-weight: 600;
+}
+
+.input-group input {
+  height: 2rem;
+  border-radius: 5px;
+  border: none;
+  background-color: rgba(0, 0, 0, 0.048);
+  margin: 0 10px;
+  font-size: 1.5rem;
+}
+
+.form-btns {
+  text-align: center;
+}
+
+.form-btns input {
+  width: clamp(50px, 40%, 20vw);
+}
