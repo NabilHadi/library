@@ -156,6 +156,14 @@ const Library = (function () {
 
       PubSub.publish("BookRemoved", books, removedBook, bookIndex);
     },
+    changeBookReadStatus(bookIndex, status = false) {
+      if (typeof bookIndex !== "number") bookIndex = Number(bookIndex);
+      if (bookIndex < 0 || bookIndex >= books.length) return;
+
+      books[bookIndex].isRead = status;
+
+      PubSub.publish("BookStatusChanged", bookIndex);
+    },
     getBooks() {
       return [...books];
     },
@@ -192,9 +200,19 @@ const BookList = (function () {
   function handleDeleteBtnClick(event) {
     const index = event.target.dataset.index;
     if (!index) return;
-    console.log(event);
 
     PubSub.publish("removeBookFromLibrary", index);
+  }
+
+  function handleToggleReadBtnClick(event) {
+    const index = event.target.dataset.index;
+    if (!index) return;
+
+    PubSub.publish(
+      "changeBookReadStatus",
+      index,
+      !Library.getBooks()[index].isRead
+    );
   }
 
   function createCard(book, index) {
@@ -226,12 +244,30 @@ const BookList = (function () {
       dataset: { index },
     });
 
-    card.append(titleDiv, authorDiv, pagesDiv, isReadDiv, deleteBookBtn);
+    const toggleReadStatusBtn = createElement({
+      tag: "button",
+      classNames: ["btn", "read-status-btn"],
+      textContent: "Change Read Status",
+      eventHandlers: {
+        click: handleToggleReadBtnClick,
+      },
+      dataset: { index },
+    });
+
+    card.append(
+      titleDiv,
+      authorDiv,
+      pagesDiv,
+      isReadDiv,
+      deleteBookBtn,
+      toggleReadStatusBtn
+    );
     return card;
   }
 
+  const bookUL = document.querySelector(".books-list");
+
   function displayBooks(books) {
-    const bookUL = document.querySelector(".books-list");
     bookUL.innerHTML = "";
     const booksLis = books.map((book, index) => {
       const li = document.createElement("li");
@@ -242,10 +278,24 @@ const BookList = (function () {
     bookUL.append(...booksLis);
   }
 
+  function updateBook(bookIndex) {
+    const bookObj = Library.getBooks()[bookIndex];
+    const bookCard = bookUL.querySelector(`.card[data-index="${bookIndex}"`);
+    if (!bookCard) return;
+    bookCard.querySelector(".book-title").textContent = bookObj.title;
+    bookCard.querySelector(".book-author").textContent = bookObj.author;
+    bookCard.querySelector(".book-pages").textContent = bookObj.pages;
+    bookCard.querySelector(".book-isRead").textContent = bookObj.isRead
+      ? "Read"
+      : "Not read";
+  }
+
   PubSub.subscribe("BookAdded", displayBooks);
   PubSub.subscribe("BookRemoved", displayBooks);
+  PubSub.subscribe("BookStatusChanged", updateBook);
   displayBooks(Library.getBooks());
 })();
 
 PubSub.subscribe("addBookToLibrary", Library.addBookToLibrary);
 PubSub.subscribe("removeBookFromLibrary", Library.removeBookFromLibrary);
+PubSub.subscribe("changeBookReadStatus", Library.changeBookReadStatus);
