@@ -21,6 +21,33 @@
 
     </tbody>
   </table>
+  <button id="new_book_btn">Add new book</button>
+
+  <form id="new_book_form">
+    <div>
+      <label for="author_input">Author</label>
+      <input type="text" id="author_input" required>
+    </div>
+    <div>
+      <label for="title_input">Book Title</label>
+      <input type="text" id="title_input" required>
+    </div>
+    <div>
+      <label for="pages_input">Number of pages</label>
+      <input type="number" id="pages_input" required>
+    </div>
+    <div>
+      <fieldset>
+        <legend>Did you read the book?</legend>
+        <div>
+          <input type="checkbox" name="read" value="yes" id="read_input">
+          <label for="read_input">Yes</label>
+        </div>
+      </fieldset>
+    </div>
+    <input type="submit">
+    <input type="reset">
+  </form>
   <script src="./script.js"></script>
 </body>
 

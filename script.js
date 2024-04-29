@@ -42,14 +42,36 @@ function displayBooks() {
     tableRow.appendChild(tdPages);
 
     const tdRead = document.createElement("td");
-    tdRead.textContent = book.pages;
+    tdRead.textContent = book.read ? "Read" : "Not read yet";
     tableRow.appendChild(tdRead);
 
     tableBody.appendChild(tableRow);
   });
 }
 
+const newBookForm = document.querySelector("#new_book_form");
+newBookForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  const author = document.querySelector("#author_input").value;
+  const title = document.querySelector("#title_input").value;
+  const pages = document.querySelector("#pages_input").value;
+  const read = document.querySelector("#read_input").checked;
+
+  console.log({ author, title, pages, read });
+  addBookToLibrary(title, author, Number(pages), read);
+  displayBooks();
+
+  // newBookForm.reset();
+
+});
+const newBookBtn = document.querySelector("#new_book_btn");
+newBookBtn.addEventListener("click", () => {
+  newBookForm.setAttribute("style", "display:block;");
+});
+
 addBookToLibrary("my title", "my Author", 123, false);
 addBookToLibrary("my title 1", "my Author", 135, true);
 addBookToLibrary("my title 2", "my Author 1", 153, false);
 addBookToLibrary("my title 3", "my Author 2", 423, true);
+displayBooks();
