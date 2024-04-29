@@ -23,32 +23,35 @@
 
       </tbody>
     </table>
-    <button id="new_book_btn">Add new book</button>
+    <button id="new_book_btn" class="btn">Add new book</button>
 
     <form id="new_book_form">
       <div>
         <label for="author_input">Author</label>
-        <input type="text" id="author_input" required>
+        <input type="text" class="form_input" id="author_input" required>
       </div>
       <div>
         <label for="title_input">Book Title</label>
-        <input type="text" id="title_input" required>
+        <input type="text" class="form_input" id="title_input" required>
       </div>
       <div>
         <label for="pages_input">Number of pages</label>
-        <input type="number" id="pages_input" required>
+        <input type="number" class="form_input" id="pages_input" required>
       </div>
       <div>
         <fieldset>
           <legend>Did you read the book?</legend>
           <div>
-            <input type="checkbox" name="read" value="yes" id="read_input">
-            <label for="read_input">Yes</label>
+
+            <label id="read_input_label" class="checkbox_label" for="read_input">Yes <input type="checkbox" name="read"
+                value="yes" id="read_input">
+              <span class="checkmark"></span>
+            </label>
           </div>
         </fieldset>
       </div>
-      <input type="submit">
-      <input type="reset">
+      <input type="submit" class="btn">
+      <input type="reset" class="btn">
     </form>
   </div>
   <script src="./script.js"></script>
