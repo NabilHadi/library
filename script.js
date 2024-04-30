@@ -48,7 +48,7 @@ function displayBooks() {
     tableBody.appendChild(tableRow);
   });
 }
-
+const formDialog = document.querySelector("#form_dialog");
 const newBookForm = document.querySelector("#new_book_form");
 newBookForm.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -61,13 +61,19 @@ newBookForm.addEventListener("submit", (e) => {
   console.log({ author, title, pages, read });
   addBookToLibrary(title, author, Number(pages), read);
   displayBooks();
+  newBookForm.reset();
+  formDialog.close();
 
   // newBookForm.reset();
 
 });
 const newBookBtn = document.querySelector("#new_book_btn");
 newBookBtn.addEventListener("click", () => {
-  newBookForm.setAttribute("style", "display:block;");
+  formDialog.showModal();
+});
+const dialogCloseBtn = document.querySelector("#form_dialog_close_btn");
+dialogCloseBtn.addEventListener("click", () => {
+  formDialog.close();
 });
 
 addBookToLibrary("my title", "my Author", 123, false);
