@@ -201,3 +201,12 @@ dialog {
 dialog::backdrop {
   background-color: rgba(0, 0, 0, 0.7);
 }
+
+.book_edit_container {
+  display: flex;
+  gap: 1rem;
+}
+
+.book_edit_container>* {
+  flex: 1;
+}

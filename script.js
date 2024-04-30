@@ -11,6 +11,10 @@ function Book(title, author, pages, read) {
   };
 }
 
+Book.prototype.toggleRead = function () {
+  this.read = !this.read;
+};
+
 
 function addBookToLibrary(title, author, pages, read) {
   library.push(new Book(title, author, pages, read));
@@ -44,6 +48,31 @@ function displayBooks() {
     const tdRead = document.createElement("td");
     tdRead.textContent = book.read ? "Read" : "Not read yet";
     tableRow.appendChild(tdRead);
+
+    const tdEdit = document.createElement("td");
+    const div = document.createElement("div");
+    div.classList.add("book_edit_container");
+    const deleteBookBtn = document.createElement("button");
+    deleteBookBtn.classList.add("btn");
+    deleteBookBtn.textContent = "REMOVE";
+    deleteBookBtn.addEventListener("click", () => {
+      library.splice(library.indexOf(book), 1);
+      displayBooks();
+    });
+
+    const toggleReadBtn = document.createElement("button");
+    toggleReadBtn.classList.add("btn");
+    toggleReadBtn.textContent = book.read ? "Unread" : "read";
+    toggleReadBtn.addEventListener("click", () => {
+      book.toggleRead();
+      displayBooks();
+    });
+
+
+    div.appendChild(toggleReadBtn);
+    div.appendChild(deleteBookBtn);
+    tdEdit.appendChild(div);
+    tableRow.appendChild(tdEdit);
 
     tableBody.appendChild(tableRow);
   });
